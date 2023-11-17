@@ -10,8 +10,8 @@ username=$(id -u -n 1000)
 builddir=$(pwd)
 
 # Add source list
-
-
+cp sources.list /etc/apt/
+cp -r sources.list.d /etc/apt/sources.list.d
 
 # Update packages list and update system
 apt update
@@ -21,7 +21,7 @@ apt upgrade -y
 apt install nala -y
 
 # Install Nix
-sh <(curl -L https://nixos.org/nix/install) --no-daemon
+sh <(curl -L https://nixos.org/nix/install) --daemon
 
 # Making .config and Moving config files and background to Pictures
 cd $builddir
@@ -67,7 +67,7 @@ unzip Meslo.zip -d /home/$username/.fonts
 
 # Jetbrains
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/JetBrainsMono.zip
-
+upzip JetBrainsMono.zip -d /home/$username/.fonts
 
 chown $username:$username /home/$username/.fonts/*
 
