@@ -19,11 +19,18 @@ export PATH=$PATH:$GOPATH/bin/bin
 
 # Path local
 export PATH=$PATH:$HOME/.local/bin
+
+# Pyenv Path
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
+
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="spaceship"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -90,7 +97,6 @@ plugins=(
   rake
   rbenv
   ruby
-  zsh-autosuggestions
   sudo
 )
 
@@ -122,6 +128,9 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias wsp="cd ~/Workspace"
+alias g="git"
+alias cls="clear"
+alias code="code --enable-features=UseOzonePlatform --ozone-platform=wayland"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -148,3 +157,4 @@ portainer/portainer-ce:latest"
 GTK_IM_MODULE=fcitx
 QT_IM_MODULE=fcitx
 XMODIFIERS=@im=fcitx
+SDL_IM_MODULE=fcitx
