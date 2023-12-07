@@ -9,6 +9,9 @@ fi
 username=$(logname)
 builddir=$(pwd)
 
+echo "# Debian Sid" | tee -a /etc/apt/sources.list
+echo "deb http://deb.debian.org/debian/ sid main contrib non-free non-free-firmware" | tee -a /etc/apt/sources.list
+
 # Update packages list and update system
 apt update
 apt upgrade -y
@@ -27,7 +30,7 @@ cp bg* "/home/$username/Pictures/backgrounds/"
 chown -R "$username:$username" "/home/$username"
 
 # Installing Essential Programs 
-nala gh install kitty unzip wget curl build-essential libgtk-4-1 libgtk-3-0 qemu -y
+nala install kitty unzip wget curl build-essential libgtk-4-1 libgtk-3-0 qemu -y
 
 # Installing Other less important Programs
 nala install neofetch flameshot psmisc vim -y
@@ -63,18 +66,18 @@ install -m 0755 -d /etc/apt/keyrings
 curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 chmod a+r /etc/apt/keyrings/docker.gpg
 
+# Github CLI
+nala install gh -y
+
 # Add the repository to Apt sources:
 echo \
   "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian \
   bookworm stable" | \
    tee /etc/apt/sources.list.d/docker.list > /dev/null
-nala update -y
+nala update
 nala install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
-groupadd docker
 usermod -aG docker $USER
 newgrp docker
-
-
 
 # =================================================================================
 
@@ -98,30 +101,21 @@ unzip "JetBrainsMono.zip" -d "/home/$username/.fonts"
 
 # === NON-FREE ===
 
-
-
 chown "$username:$username" "/home/$username/.fonts/*"
 
 # Reloading Font
 fc-cache -vf
 
 # Setup .zsh
-nala install zsh
-
-# Oh my zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
-# powerlevel10k
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+nala install zsh -y
 
 # install fcitx5
-nala install --install-recommends fcitx5 fcitx5-mozc
-nala remove uim uim-mozc
-nala install kde-config-fcitx5
+nala install --install-recommends fcitx5 fcitx5-mozc -y
+nala install kde-config-fcitx5 -y
 
 # Removing zip Files
 rm -rf *.zip
 rm -rf *.tar.gz
 
-# Reboot
-echo "Installation completed. Reboot your system for changes to take effect."
+# Oh my zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
