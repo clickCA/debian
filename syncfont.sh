@@ -4,9 +4,11 @@
 source_path="$HOME/.config/fontconfig/fonts.conf"
 destination_path="fonts.conf"
 
+
 # Copy the file
 cp "$source_path" "$destination_path"
-
+# Copy the kde config
+cp ~/.config/kdeglobals kdeglobals
 # Check if the copy was successful
 if [ $? -eq 0 ]; then
     echo "File copied successfully."
