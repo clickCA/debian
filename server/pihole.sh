@@ -1,4 +1,3 @@
-apt install sudo vim
 sudo apt install ufw
 sudo ufw enable
 sudo ufw allow ssh
