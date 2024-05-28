@@ -4,7 +4,7 @@ current_date_time=$(date)
 # mkdir dotfiles/.config
 # cp ~/.zshrc dotfiles
 cp ~/.bashrc .
-cp ~/Pictures/* /background
+cp ~/Pictures/* ./background
 # mkdir dotfiles/.config/kitty && cp ~/.config/kitty/kitty.conf dotfiles/.config/kitty
 
 git add .
