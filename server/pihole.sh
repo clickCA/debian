@@ -3,6 +3,7 @@ sudo ufw enable
 sudo ufw allow ssh
 sudo ufw allow http
 sudo ufw allow https
+sudo ufw allow 22/tcp
 ufw allow 80/tcp
 ufw allow 53/tcp
 ufw allow 53/udp
