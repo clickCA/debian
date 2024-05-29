@@ -12,4 +12,5 @@ ufw allow 67/udp
 sudo apt install curl
 sudo apt install git
 sudo apt install python3
+
 curl -sSL https://install.pi-hole.net | bash
